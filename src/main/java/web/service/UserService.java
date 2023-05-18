@@ -9,4 +9,5 @@ public interface UserService {
     void saveUser(User user);
     User findById(long id);
     void updateUser(User user);
+    void deleteUser(long id);
 }

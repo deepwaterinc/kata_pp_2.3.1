@@ -24,10 +24,10 @@
           <td th:text="${user.surname}"></td>
           <td><a th:href="@{/users/{id}(id=${user.id})}">View</a></td>
           <td><a th:href="@{/users/{id}/user-edit(id=${user.id})}">Edit</a></td>
-          <td><a th:href="@{user-delete/{id}(id=${user.id})}">Delete</a></td>
         </tr>
         </tbody>
       </table>
+      <a th:href="@{/users/user-create}">Create new user</a>
     </div>
   </div>
 </body>

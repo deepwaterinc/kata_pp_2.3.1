@@ -32,7 +32,7 @@ public class UsersController {
     }
 
     //Создаем объект user и направляем на страницу с формой
-    @GetMapping("/user-create")
+    @GetMapping("/users/user-create")
     public String createUser(Model model) {
         model.addAttribute("user", new User());
         return "create-form";
@@ -41,13 +41,13 @@ public class UsersController {
     @PostMapping("/users")
     public String addUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
-        return "redirect:/users";
+        return "redirect:/";
     }
 
     //запрос по адресу /users/{id}/user-edit. Читаем id и записываем в модель юзера с подходящим id.
     //направляем patch запрос на адрес /users/{id}.
     @GetMapping("/users/{id}/user-edit")
-    public String editUser( @PathVariable("id") int id, Model model) {
+    public String editUser(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.findById(id));
         return "edit-form";
     }
@@ -57,6 +57,12 @@ public class UsersController {
     @PatchMapping("/users/{id}")
     public String updateUser(@ModelAttribute("user") User user) {
         userService.updateUser(user);
+        return "redirect:/";
+    }
+
+    @DeleteMapping("users/{id}/user-delete")
+    public String deleteUser(@PathVariable("id") int id ) {
+        userService.deleteUser(id);
         return "redirect:/";
     }
 }
