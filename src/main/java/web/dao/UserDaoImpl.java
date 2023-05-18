@@ -14,8 +14,25 @@ public class UserDaoImpl implements UserDao{
     private EntityManager entityManager;
     @Override
     public List<User> findAll(){
-        String jpql = "SELECT X FROM User X";
-        TypedQuery<User> query = entityManager.createQuery(jpql, User.class);
-        return query.getResultList();
+//        String jpql = "SELECT X FROM User X";
+//        TypedQuery<User> query = entityManager.createQuery(jpql, User.class);
+//        return query.getResultList();
+        return entityManager.createQuery("SELECT user FROM User user", User.class).getResultList();
+    }
+
+    @Override
+    public void saveUser(User user) {
+        entityManager.persist(user);
+        entityManager.close();
+    }
+
+    @Override
+    public User findById(long id) {
+        return entityManager.find(User.class, id);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        entityManager.merge(user);
     }
 }
